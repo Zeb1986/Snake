@@ -1,4 +1,4 @@
-let canvas = document.getElementById("myCanvas");
+let canvas = document.getElementById("Canvas");
 let ctx = canvas.getContext("2d");
 //Variables
 let cell = 20;
