@@ -13,17 +13,27 @@ body {
     background: #eee;
     display: block;
   position: absolute;
+  z-index: 1;
 }
 #Canvas {
   background:transparent;
   display: block;
 position: absolute;
-z-index: 1;
+z-index: 3;
 }
-.b1 {
+#canvas_icon {
+  background:transparent;
+  display: block;
+position: absolute;
+z-index: 2;
+}
+.start {
   position: absolute;
   left: 200px;
   top: -30px;
   width: 100px;
   height: 30px;
 } 
+.hidden {
+  visibility: hidden;
+}

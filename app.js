@@ -1,12 +1,17 @@
+
+
 let canvas = document.getElementById("Canvas");
 let ctx = canvas.getContext("2d");
 //Variables
+function mathRendom() {
+    return Math.round(Math.random() * 23 + 1) * cell;
+}
 let cell = 20;
 let score = 0;
-let deltaX = Math.round(Math.random() * 23 + 1) * cell;
-let deltaY = Math.round(Math.random() * 23 + 1) * cell;
-let fx = Math.round(Math.random() * 23 + 1) * cell;
-let fy = Math.round(Math.random() * 23 + 1) * cell;
+let deltaX = mathRendom();
+let deltaY = mathRendom();
+let fx = mathRendom();
+let fy = mathRendom();
 //snake boody
 let snake = [];
 snake[0] = {
@@ -21,6 +26,8 @@ snake[2] = {
     x: deltaX - cell * 2,
     y: deltaY
 };
+
+
 function drawSnake() {
     for (i = 0; i < snake.length; i++) {
         ctx.beginPath();
@@ -49,7 +56,6 @@ function drawSnake() {
 
     }
 }
-drawSnake()
 /*apple drawl*/
 function food() {
     ctx.beginPath();
@@ -58,7 +64,7 @@ function food() {
     ctx.fillStyle = "#fa0a0a";
     ctx.fill();
 };
-food();
+
 
 //Collapse
 function eatTail(head, arr) {
@@ -126,7 +132,7 @@ function drawEyes() {
         ctx.fill();
     }
 }
-drawEyes()
+
 function reDraw() {
     for (i = 0; i < snake.length; i++) {
         while (snake[i].x == fx && snake[i].y == fy) {
@@ -134,7 +140,7 @@ function reDraw() {
         }
     }
 }
-reDraw();
+
 
 //Igra
 function drawGame() {
@@ -146,19 +152,15 @@ function drawGame() {
 
     if (deltaX > canvas.width + cell) {
         deltaX = -cell;
-        return deltaX;
     }
     if (deltaX < -cell) {
         deltaX = canvas.width + cell;
-        return deltaX;
     }
     if (deltaY > canvas.height + cell) {
         deltaY = -cell;
-        return deltaY;
     }
     if (deltaY < -cell) {
         deltaY = canvas.height + cell;
-        return deltaY;
     }
     if (dir == "left") deltaX -= cell;
     if (dir == "right") deltaX += cell;
@@ -172,7 +174,7 @@ function drawGame() {
     function eat() {
         if (newHead.x === fx && newHead.y === fy) {
             score += 1
-            return fx = Math.round(Math.random() * 23 + 1) * cell, fy = Math.round(Math.random() * 23 + 1) * cell;
+            return fx = mathRendom(), fy = mathRendom();
 
         } else {
             snake.pop();
@@ -189,15 +191,23 @@ function drawGame() {
 }
 
 let game = '';
-let b1 = document.querySelector('.b1');
+let start = document.querySelector('.start');
 
-b1.onclick = function f1() {
+start.onclick = () => {
     if (game == '') {
         game = setInterval(drawGame, 200);
-        b1.innerHTML = 'RESTART'
+        start.innerHTML = 'RESTART'
     }
     else {
         document.location.reload(true);
     }
 }
 
+function init() {
+    drawSnake();
+    food();
+    //   drawEyes();
+    reDraw();
+}
+
+init();

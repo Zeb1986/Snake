@@ -1,5 +1,30 @@
-$(document).ready(function () {
-    window.onload = function () {
+
+let icon = '';
+
+fetch('http://dataservice.accuweather.com/forecasts/v1/daily/1day/324505?apikey=SD3IOUbAchPsZCz6KJoAfdoReCkm2wbk&metric=true')
+    .then(function (resp) { return resp.json() })
+    .then(function data(data) {
+        console.log(data);
+        icon = data.DailyForecasts[0].Day.Icon;
+        const elem = document.getElementById('icon');
+        elem.src = `https://www.accuweather.com/images/weathericons/${icon}.svg`
+        atr = elem.getAttribute('src')
+        console.log(atr);
+        elem.onload = function () {
+            var canvas = document.getElementById("canvas_icon");
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(elem, 100, 100);
+        };
+        interval = setInterval(elem.onload, 33)
+    })
+    .catch(function () { });
+
+console.log(icon);
+
+if (icon === 29 || (icon >= 19 && icon <= 23)) {
+
+    $(document).ready(function () {
+
         //canvas init
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
@@ -75,6 +100,8 @@ $(document).ready(function () {
 
         //animation loop
         setInterval(draw, 33);
-    }
 
-})
+
+    })
+
+}
